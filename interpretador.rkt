@@ -41,80 +41,76 @@
 ;            := (<expresion> {<expresion>}*( ) )
 ;               <evaluar-expresion exp exps>
 ;
+;            := true
+;               <true-expresion>
 ;
-;<primitiva-booleana> := < (primitiva-booleana-menor)
-;
-;                     := > (primitiva-booleana-mayor)
-;
-;                     := menor= (primitiva-booleana-menor-igual)
-;
-;                     := mayor= (primitiva-booleana-mayor-igual)
-;
-;                     := == (primitiva-booleana-igual)
-;
-;                     := != (primitiva-booleana-diferente)
-;
-;                     := && (primitiva-booleana-and)
-;
-;                     := ^^ (primitiva-booleana-or)
-;
-;                     := not (primitiva-booleana-not) (unaria)
+;            := false
+;               <false-expresion>
 ;
 ;
-;<primitiva-aritmetica-enteros-b> :=  + (primitiva-suma)
+;<primitivas-booleana-binaria> := < (primitiva-booleana-menor)
 ;
-;                                 :=  - (primitiva-resta)
+;                              := > (primitiva-booleana-mayor)
 ;
-;                                 :=  * (primitiva-multiplicacion)
+;                              := menor= (primitiva-booleana-menor-igual)
 ;
-;                                 :=  / (primitiva-division)
+;                              := mayor= (primitiva-booleana-mayor-igual)
 ;
-;                                 :=  % (primitiva-modulo)
+;                              := == (primitiva-booleana-igual)
 ;
+;                              := != (primitiva-booleana-diferente)
 ;
-;<primitiva-aritmetica-enteros-u> := add1 (primitiva-add1)
+;                              := && (primitiva-booleana-and)
 ;
-;                                 := sub1 (primitiva-subb1)
+;                              := ^^ (primitiva-booleana-or)
 ;
-;
-;
-;
-;<primitiva-aritmetica-base-b> :=   +  (primitiva-base-suma)
-;
-;                              :=   -  (primitiva-base-resta)
-;
-;                              :=   *  (primitiva-base-multiplicacion)
+;                              := not (primitiva-booleana-not) (unaria)
 ;
 ;
-;<primitiva-aritmetica-base-u> := add1 (primitiva-base-add1)
+;<primitivas-binarias> :=  + (primitiva-suma)
 ;
-;                              := sub1 (primitiva-base-subb1)
+;                      :=  - (primitiva-resta)
+;
+;                      :=  * (primitiva-multiplicacion)
+;
+;                      :=  / (primitiva-division)
+;
+;                      :=  % (primitiva-modulo)
+;
+;                      := concatenar (primitiva-concatenar)
 ;
 ;
+;<primitivas-unarias> := add1 (primitiva-add1)
+;
+;                     := sub1 (primitiva-subb1)
+;
+;                     := longitud (primitiva-longitud)
 ;
 ;
-;<primitiva-cadena-b> := concatenar (primitiva-concatenar)
+;<primitivas-binarias-base>     :=   +  (primitiva-base-suma)
 ;
-;<primitiva-cadena-u> := longitud   (primitiva-longitud)
+;                               :=   -  (primitiva-base-resta)
+;
+;                               :=   *  (primitiva-base-multiplicacion)
 ;
 ;
 ;<primitiva-lista> := empty?
-;                  := empty
-;                  := cons
 ;                  := list?
 ;                  := car
 ;                  := cdr
+;
+;                  := cons
 ;                  := append
 ;
 ;
-;<numeros-otras-bases> := x32
-;                         <base-32>
+;<numeros-bases> := [x32 numero {<numero>}* ]
+;                   <base-32>
 ;
-;                      := x16
-;                         <base-16>
+;                := [x16 numero {<numero>}* ]
+;                   <base-16>
 ;
-;                      := x8
-;                         <base-8>
+;                := [x8 numero {<numero>}* ]
+;                   <base-8>
 ;
 ;
 ;***********************************************************************************
