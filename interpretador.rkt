@@ -12,43 +12,43 @@
 ;
 ;
 ;<expresion> := <numero>
-;               numero-lit (num)
+;               <numero-expresion (num)>
 ;
 ;            := :<texto>:
-;               <texto-lit (txt)>
+;               <texto-expresion (txt)>
 ;
 ;            := !<identificador>
-;               <var-exp (id)>
+;               <var-expresion (id)>
 ;
-;            := (expresion <primitiva-binaria> expresion)
+;            := expresion <primitiva-binaria> expresion
 ;               <primapp-bin-exp (exp1 prim-binaria exp2)>
 ;
-;            := <primitiva-unaria> (expresion)
+;            := <primitiva-unaria> expresion
 ;               <primapp-un-exp (prim-unaria exp)>
 ;
-;            := Si <expresion> entonces <expresion> sino <expresion> finSI
-;               <condicional-exp (test-exp true-exp false-exp)>
+;            := if <expresion> then <expresion> else <expresion> endIf
+;               <if-expresion (test-exp true-exp false-exp)>
 ;
-;            := declarar ( {<indentificador> = <expresion>}*(;) ) {<expresion>}
-;               <variableLocal-exp (ids exps cuerpo)>
+;            := let ( {<indentificador> = <expresion>}*(;) ) {<expresion>}
+;               <let-expresion (ids exps cuerpo)>
 ;
 ;            := letrec {<identificador> ({<indetificador>}*(,)) = <expresion>}* in <expresion>
-;               <letrec-exp ( proc-names ids bodies letrec-body )>
+;               <letrec-expresion ( proc-names ids bodies letrec-body )>
 ;
 ;            := procedimiento ( {<indentificador>}*(,)) haga <expresion> finProc
-;               <procedimiento-exp (ids cuerpo)>
+;               <procedimiento-expresion (ids cuerpo)>
 ;
-;            := evaluar <expresion> ({<expresion>}*(,)) finEval
-;               <app-exp exp exps>
+;            := (<expresion> {<expresion>}*( ) )
+;               <evaluar-expresion exp exps>
 ;
 ;
 ;<primitiva-booleana> := < (primitiva-booleana-menor)
 ;
 ;                     := > (primitiva-booleana-mayor)
 ;
-;                     := <= (primitiva-booleana-menor-igual)
+;                     := menor= (primitiva-booleana-menor-igual)
 ;
-;                     := >= (primitiva-booleana-mayor-igual)
+;                     := mayor= (primitiva-booleana-mayor-igual)
 ;
 ;                     := == (primitiva-booleana-igual)
 ;
@@ -58,36 +58,63 @@
 ;
 ;                     := ^^ (primitiva-booleana-or)
 ;
-;                     := not (primitiva-booleana-not)
+;                     := not (primitiva-booleana-not) (unaria)
 ;
 ;
-;<primitiva-aritmetica> :=  + (primitiva-suma)
+;<primitiva-aritmetica-enteros-b> :=  + (primitiva-suma)
 ;
-;                       :=  - (primitiva-resta)
+;                                 :=  - (primitiva-resta)
 ;
-;                       :=  / (primitiva-div)
+;                                 :=  * (primitiva-multiplicacion)
 ;
-;                       :=  * (primitiva-multi)
+;                                 :=  / (primitiva-division)
 ;
-;                       := add1 (primitiva-add1)
-;
-;                       := sub1 (primitiva-subb1)
+;                                 :=  % (primitiva-modulo)
 ;
 ;
-;<primitiva-aritmetica-base> :=   +  (primitiva-base-suma)
+;<primitiva-aritmetica-enteros-u> := add1 (primitiva-add1)
 ;
-;                            :=   -  (primitiva-base-resta)
-;
-;                            :=   *  (primitiva-base-multi)
-;
-;                            := add1 (primitiva-base-add1)
-;
-;                            := sub1 (primitiva-base-subb1)
+;                                 := sub1 (primitiva-subb1)
 ;
 ;
-;<primitiva-cadena> := longitud   (primitiva-longitud)
 ;
-;                   := concatenar (primitiva-concatenar)
+;
+;<primitiva-aritmetica-base-b> :=   +  (primitiva-base-suma)
+;
+;                              :=   -  (primitiva-base-resta)
+;
+;                              :=   *  (primitiva-base-multiplicacion)
+;
+;
+;<primitiva-aritmetica-base-u> := add1 (primitiva-base-add1)
+;
+;                              := sub1 (primitiva-base-subb1)
+;
+;
+;
+;
+;<primitiva-cadena-b> := concatenar (primitiva-concatenar)
+;
+;<primitiva-cadena-u> := longitud   (primitiva-longitud)
+;
+;
+;<primitiva-lista> := empty?
+;                  := empty
+;                  := cons
+;                  := list?
+;                  := car
+;                  := cdr
+;                  := append
+;
+;
+;<numeros-otras-bases> := x32
+;                         <base-32>
+;
+;                      := x16
+;                         <base-16>
+;
+;                      := x8
+;                         <base-8>
 ;
 ;
 ;***********************************************************************************
