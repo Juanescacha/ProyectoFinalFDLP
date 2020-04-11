@@ -1,0 +1,501 @@
+;; Integrantes: 
+;; Juan David Morán Bonilla - 201810052
+
+;; PROYECTO DEL CURSO 2018-2
+;; FUNDAMENTOS DE LENGUAJES DE PROGRAMACIÓN
+
+; -> Primera Parte: Ruby sin Objetos
+
+ruby 
+ def mundo()
+  return "mundo";
+ end 
+
+ puts ("hola" + (mundo())); 
+end
+
+ruby
+ declare x;
+ x = 2 ;
+ if (x > 5 ) then
+  puts x;
+ elsif (x == 3 ) then
+  puts "mundo";
+ elsif (x >= 3 ) then
+  puts "mundo cruel";
+ else
+  puts "hola";
+ else
+  puts "FLP";
+ end
+end
+
+ruby
+ declare x,y;
+ x = 0 ;
+ y = -1;
+ while (x < 10 ) do
+  puts x;
+  x += 1 ;
+ end
+ puts (y * 5);
+end
+
+ruby
+ declare x,m,l;
+ x = 0 ;
+ m = 14;
+ until (x >= 10 ) do
+  puts x;
+  x += 1 ;
+ end
+ l = (m / 7);
+ puts l;
+end
+
+ruby
+ def print (val)
+  puts val;
+ end
+ print( "hola mundo" );
+end
+
+ruby
+ def fact (n)
+  if (n == 0 ) then
+   return 1 ;
+  else
+   puts "el valor de n es " ,n;
+  return (n * (fact ((n - 1 ))));
+  end
+ end
+ puts "el factorial de 5 es", (fact( 5 ));
+end
+
+ruby
+ def add1(val)
+  val += 1;
+  return val;
+ end
+
+ def fact (n)
+  if (n == 0) then
+   return 1;
+  else
+   puts "el valor de n es ",n;
+   return (n * (fact ((n - 1))));
+  end
+ end
+
+ def print (val)
+  puts val;
+ end
+
+ puts(fact(5));
+ print( "hola mundo" );
+ add1(100);
+end
+
+ruby
+ def add1(val)
+  val += 1;
+  return val;
+ end
+
+ def fact (n)
+  if (n == 0) then
+   return 1;
+  else
+   puts "el valor de n es ",n;
+   return (n * (fact ((n - 1))));
+  end
+ end
+
+ add1((fact(5)));
+end
+
+ruby
+ def fact (n)
+  if (n == 0) then
+   return 1;
+  else
+   puts "el valor de n es ",n;
+   return (n * (fact ((n - 1))));
+  end
+ end 
+
+ def fibo (n)
+  if (n <= 2 ) then
+   return 1 ;
+  else
+   declare left,right;
+   left = (n - 1 );
+   right = (n - 2 );
+   return ((fibo (left)) + (fibo (right)));
+  end
+ end
+
+ fact((fibo(10)));
+end
+
+ruby
+ def to_text (num)
+  declare text;
+  text = [ "cero" , "uno" ,
+   "dos" , "tres" ,
+   "cuatro" , "cinco" ,
+   "seis" , "siete" ,
+   "ocho" , "nueve" ];
+  return (text[num]);
+ end
+
+ to_text ( 5 );
+end
+
+ruby
+ declare r;
+ r = [1,2,3,"a","b","c"];
+ puts (r[2]);
+end
+
+ruby
+ declare r;
+ r = [[1,7,9],2,3,"a","b","c"];
+ puts (r[0,2]);
+end
+
+ruby
+ declare r;
+ r = [[1,7,9],2,3,"a","b","c"];
+ puts (r[0][1]);
+end
+
+ruby
+ def add1(val)
+  val += 1;
+  return val;
+ end
+
+ def aux (n)
+  declare f; 
+  f = (n + 1); 
+  return (add1(f));
+ end
+
+ add1((aux(5)));
+end
+
+
+ruby 
+ def g() 
+  puts "FLP"; 
+ end
+
+ def aux (n)
+  declare f; 
+  f = (n + 1); 
+  return g;
+ end
+
+ aux(5);
+end
+
+ruby
+ declare a;
+ a = [[1,2],3];
+ puts (a[0][0]);
+end
+
+ruby
+ def add1(val)
+  val += 1;
+  return val;
+ end
+ declare f;
+ f = add1(5);
+ puts f;
+end
+
+ruby
+ def add1(val)
+  val += 1;
+  return val;
+ end
+ declare f;
+ f = ((add1(5)) / 2);
+ puts f;
+end
+
+ruby
+ declare f,a; 
+ a = ["z",true,2,7,"FLP",[4,5,6]];
+ f = ((a[3]) ** 2);
+ puts f;
+end
+
+ruby
+ def add1(val)
+  val += 1;
+  return val;
+ end
+
+ declare f;
+ f = 2;
+ f *= add1(5);
+
+ puts f;
+end
+
+ruby
+ def sumatoriaPotencias(n)
+  declare aux;
+  aux = 0;
+  for x in (1 .. n) do
+   aux += (x ** 2);
+  end
+  return aux;
+ end
+
+ puts "La Serie de potencia para 7 es:", (sumatoriaPotencias(7));
+end
+
+ruby
+ def esPar(x)
+  if ((x % 2) == 0) then
+   puts "El número es par";
+  else
+   puts "El número es impar";
+  end
+ end
+
+ puts (esPar(2));
+ puts (esPar(36));
+ puts (esPar(27));
+ puts (esPar(15));
+end
+
+ruby
+ def esPrimo(x)
+  declare cont, bandera;
+  cont = 2;
+  bandera = true;
+  while (bandera and (cont != x)) do
+   if ((x % cont) == 0) then
+    bandera = false;
+   else
+    cont += 1;
+   end
+  end
+  return bandera;
+ end
+
+ def listaPrimos(n)
+  declare aux, bandera;
+  aux = [];
+  if (n < 2) then
+    puts "El número ingresado debe ser mayor a 2";
+  else
+   for z in (2 .. n) do
+    bandera = esPrimo(z);
+    if bandera then
+     aux = (aux + [z]);  
+    end
+   end
+  end
+  return aux; 
+ end
+ puts "Los números primos del 1 al 20 son:", (listaPrimos(20));
+end
+
+
+;************************************************************************************************************************************************************************************
+
+
+; -> Segunda Parte: Ruby con Objetos
+
+
+ruby
+ class Integer
+  attr :num;
+  
+  def initialize(@num)
+   num = @num;
+  end
+
+  def num=(@num)
+   num = @num;
+  end
+
+  def to_s()
+   return @num;
+  end
+ end
+
+ class Float < Integer
+  attr :decm;
+
+  def initialize(@ent,@decm)
+   decm = @decm;
+   super initialize(@ent);
+  end
+
+  def to_s()
+   return (num + (decm / (decm * 10)));
+  end
+ end
+
+ #Main program
+ declare a;
+ a = Float.new(1,1);
+ puts a;
+ a.num=(5);
+ puts a;
+end
+
+;*******************************************
+
+ruby
+ class Vector2D
+  attr :x, :y;
+  
+  def initialize(@x,@y)
+   x = @x;
+   y = @y;
+  end
+
+  def x()
+   return x;
+  end
+
+  def x=(@x)
+   x = @x;
+  end
+
+  def y()
+   return y;
+  end
+
+  def y=(@y)
+   y = @y;
+  end
+ end
+
+ class Vector3D < Vector2D
+  attr :z;
+ 
+  def initialize(@x,@y,@z)
+   z = @z;
+   super initialize (@x,@y);
+  end
+
+   def z()
+    return z;
+   end
+
+   def z=(@z)
+    z = @z;
+   end
+ end
+
+ #Main program
+ declare a,b;
+ a = Vector2D.new(1,2);
+ b = Vector3D.new(3,8,5);
+ puts (a.x()); 
+ puts (a.y=(9));
+ puts (a.y());
+ puts ((b.z()) + (b.y()));
+end
+
+;*******************************************
+
+ruby
+ class Vehiculo
+  attr :nombre, :num_ruedas, :placa;
+
+  def initialize(@nombre, @num_ruedas, @placa)
+   nombre = @nombre;
+   num_ruedas = @num_ruedas;
+   placa = @placa;
+  end
+
+  def nombre()
+   return nombre;
+  end
+
+  def num_ruedas()
+   return num_ruedas;
+  end
+
+  def placa()
+   return placa;
+  end
+
+  def nombre=(@nombre)
+   nombre = @nombre;
+  end
+
+  def num_ruedas=(@num_ruedas)
+   num_ruedas = @num_ruedas;
+  end
+
+  def placa=(@placa)
+   placa = @placa;
+  end
+ end
+
+ class Motocicleta < Vehiculo
+  attr :cilindraje, :concesionario;
+
+  def initialize(@nombre, @num_ruedas, @placa, @cilindraje, @concesionario)
+   cilindraje = @cilindraje;
+   concesionario = @concesionario;
+   super initialize (@nombre, @num_ruedas, @placa);
+  end
+
+  def cilindraje()
+   return cilindraje;
+  end
+
+  def concesionario()
+   return concesionario;
+  end
+
+  def cilindraje=(@cilindraje)
+   cilindraje = @cilindraje;
+  end
+
+  def concesionario=(@concesionario)
+   concesionario = @concesionario;
+  end
+ end
+
+ class Cuatrimoto < Motocicleta
+  attr :terreno;
+
+  def initialize(@nombre, @num_ruedas, @placa, @cilindraje, @concesionario, @terreno)
+   terreno = @terreno;
+   super initialize (@nombre, @num_ruedas, @placa, @cilindraje, @concesionario);
+  end
+
+  def terreno()
+   return terreno;
+  end
+
+  def terreno=(@terreno)
+   terreno = @terreno;
+  end
+ end
+
+ #Main program
+ declare vehiculo1;
+ vehiculo1 = Cuatrimoto.new("Raptor",4,"ADF65G",250,"Yamaha","Colina");
+ vehiculo1.cilindraje=(700);
+ puts "*** Ficha Técnica del Vehículo 1 ***";
+ puts ("Nombre: " + (vehiculo1.nombre()));
+ puts ("Número de Ruedas: " + (vehiculo1.num_ruedas()));
+ puts ("Placa: " + (vehiculo1.placa()));
+ puts ("Cilindraje: " + (vehiculo1.cilindraje()));
+ puts ("Concesionario: " + (vehiculo1.concesionario()));
+ puts ("Terreno: " + (vehiculo1.terreno()));
+end
