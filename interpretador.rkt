@@ -18,11 +18,11 @@
 ;            := !<identificador>
 ;               <var-expresion (id)>
 ;
-;            := <primitivas-binarias> ( expresion expresion )
-;               <prim-bin-expresion (prim-bin exp1 exp2)>
+;            := expresion <primitivas-binarias> expresion
+;               <prim-bin-expresion (exp1 prim-bin exp2)>
 ;
-;            := <primitivas-unarias> ( expresion )
-;               <prim-un-expresion (prim-un exp)>
+;            := expresion <primitivas-unarias>
+;               <prim-un-expresion (exp prim-un)>
 ;
 ;            := if ( <expresion> ) then { <expresion> } else { <expresion> }
 ;               <if-expresion (test-exp true-exp false-exp)>
@@ -61,22 +61,63 @@
 ;               <valor-null-expresion>
 ;
 ;
-;<primitivas-binarias> :=  + (primitiva-suma)
+;<primitivas-binarias> := <primitivas-binarias-10>
 ;
-;                      :=  - (primitiva-resta)
+;                      := <primitivas-binarias-8>
 ;
-;                      :=  * (primitiva-multiplicacion)
+;                      := <primitivas-binarias-16>
 ;
-;                      :=  / (primitiva-division)
+;                      := <primitivas-binarias-32>
 ;
-;                      :=  % (primitiva-modulo)
+;                      := <primitivas-binarias-booleanas>
+;
+;                      := <primitivas-binarias-listas>
 ;
 ;
-;<primitivas-booleanas-binarias> := concatenar (primitiva-concatenar)
+;<primitivas-unarias> := add1 (primitiva-add1)
+;
+;                     := sub1 (primitiva-sub1)
+;
+;                     := <primitivas-unarias-booleanas>
+;
+;                     := <primitivas-unarias-listas>
+;
+;
+;<primitivas-binarias-10> :=  + (primitiva-suma)
+;
+;                         :=  - (primitiva-resta)
+;
+;                         :=  * (primitiva-multiplicacion)
+;
+;                         :=  / (primitiva-division)
+;
+;                         :=  % (primitiva-modulo)
+;
+;
+;<primitivas-binarias-8> :=  +8 (primitiva-suma-8)
+;
+;                        :=  -8 (primitiva-resta-8)
+;
+;                        :=  *8 (primitiva-multiplicacion-8)
+;
+;
+;<primitivas-binarias-16> :=  +16 (primitiva-suma-16)
+;
+;                         :=  -16 (primitiva-resta-16)
+;
+;                         :=  *16 (primitiva-multiplicacion-16)
+;
+;
+;<primitivas-binarias-32> :=  +32 (primitiva-suma-32)
+;
+;                         :=  -32 (primitiva-resta-32)
+;
+;                         :=  *32 (primitiva-multiplicacion-32)
+;
+;
+;<primitivas-binarias-booleanas> := concatenar (primitiva-concatenar)
 ;
 ;                                := cons (primitiva-cons)
-;
-;                                := append (primitiva-append)
 ;
 ;                                := < (primitiva-menor)
 ;
@@ -95,25 +136,20 @@
 ;                                := ^^ (primitiva-or)
 ;
 ;
-;<primitivas-booleanas-unarias> := not (primitiva-not)
-;
-;
-;<primitivas-unarias> := add1 (primitiva-add1)
-;
-;                     := sub1 (primitiva-sub1)
-;
-;                     := list? (primitiva-booleana-list)
-;
-;                     := car (primitiva-car)
-;
-;                     := cdr (primitiva-cdr)
+;<primitivas-unarias-booleanas> := not (primitiva-not)
 ;
 ;
 ;<primitivas-unarias-listas> := empty?
 ;
-;                            := longitud (primitiva-longitud)
+;                            := length (primitiva-longitud)
 ;
-;                            :=list? (primitiva-booleana-lista)
+;                            := list? (primitiva-booleana-lista)
+;
+;                            := car (primitiva-car)
+; 
+;                            := cdr (primitiva-cdr)
+;
+;<primitivas-binarias-listas> := append (primitiva-append)
 ;
 ;
 ;***********************************************************************************

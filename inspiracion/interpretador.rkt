@@ -2,10 +2,8 @@
 
 (require racket/string)    ; Importamos libereria para el manejo de strings
 
-; Integrantes:
-; Juan Esteban Camargo Chacon - 1924984
 
-;<programa>  :=  <expresion> {<expresion>}* 
+;<programa>  :=  <expresion>
 ;                 un-programa (exp)
 ;
 ;
@@ -71,49 +69,44 @@
 ;
 ;                      :=  % (primitiva-modulo)
 ;
+;                      := concatenar (primitiva-concatenar)
 ;
-;<primitivas-booleanas-binarias> := concatenar (primitiva-concatenar)
+;                      := cons (primitiva-cons)
 ;
-;                                := cons (primitiva-cons)
+;                      := append (primitiva-append)
 ;
-;                                := append (primitiva-append)
+;                      := < (primitiva-booleana-menor)
 ;
-;                                := < (primitiva-menor)
+;                      := > (primitiva-booleana-mayor)
 ;
-;                                := > (primitiva-mayor)
+;                      := menor= (primitiva-booleana-menor-igual)
 ;
-;                                := menor= (primitiva-menor-igual)
+;                      := mayor= (primitiva-booleana-mayor-igual)
 ;
-;                                := mayor= (primitiva-mayor-igual)
+;                      := == (primitiva-booleana-igual)
 ;
-;                                := == (primitiva-igual)
+;                      := != (primitiva-booleana-diferente)
 ;
-;                                := != (primitiva-diferente)
+;                      := && (primitiva-booleana-and)
 ;
-;                                := && (primitiva-and)
-;
-;                                := ^^ (primitiva-or)
-;
-;
-;<primitivas-booleanas-unarias> := not (primitiva-not)
+;                      := ^^ (primitiva-booleana-or)
 ;
 ;
 ;<primitivas-unarias> := add1 (primitiva-add1)
 ;
 ;                     := sub1 (primitiva-sub1)
 ;
+;                     := longitud (primitiva-longitud)
+;
+;                     := not (primitiva-booleana-not)
+;
+;                     := empty? (primitiva-booleana-empty)
+;
 ;                     := list? (primitiva-booleana-list)
 ;
 ;                     := car (primitiva-car)
 ;
 ;                     := cdr (primitiva-cdr)
-;
-;
-;<primitivas-unarias-listas> := empty?
-;
-;                            := longitud (primitiva-longitud)
-;
-;                            :=list? (primitiva-booleana-lista)
 ;
 ;
 ;***********************************************************************************
