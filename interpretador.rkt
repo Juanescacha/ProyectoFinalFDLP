@@ -1,65 +1,71 @@
 #lang eopl
 
-(require racket/string)    ; Importamos libereria para el manejo de strings
+;(require racket/string)    ; Importamos libereria para el manejo de strings
 
 ; Integrantes:
 ; Juan Esteban Camargo Chacon - 1924984
-
-;<programa>  :=  <expresion> {<expresion>}* 
-;                 un-programa (exp)
+;
+;<programa>  := <expresion> {<expresion>}* 
+;                un-programa (exp)
 ;
 ;
 ;<expresion> := <numero>
-;               <numero-expresion (num)>
+;               <numero (num)>
 ;
 ;            := :<texto>:
-;               <texto-expresion (txt)>
+;               <texto (txt)>
 ;
-;            := !<identificador>
-;               <var-expresion (id)>
+;            := <identificador>
+;               <identificador (id)>
 ;
-;            := expresion <primitivas-binarias> expresion
-;               <prim-bin-expresion (exp1 prim-bin exp2)>
+;            := true
+;               <true-value>
 ;
-;            := expresion <primitivas-unarias>
-;               <prim-un-expresion (exp prim-un)>
+;            := false
+;               <false-value>
 ;
-;            := if ( <expresion> ) then { <expresion> } else { <expresion> }
-;               <if-expresion (test-exp true-exp false-exp)>
+;            := [x32 numero {<numero>}* ]
+;               <base-32-numero>
 ;
-;            := let ( {<indentificador> = <expresion>}*(;) ) in { <expresion> }
-;               <let-expresion (ids exps cuerpo)>
+;            := [x16 numero {<numero>}* ]
+;               <base-16-numero>
+;
+;            := [x8 numero {<numero>}* ]
+;               <base-8-numero>
+;
+;            := MEZCLAVAL
+;               <valor-MEZCLAVAL>
+;
+;            := (lista <expresion> , {<expresion>}*(,) )
+;
+;            CARACTERISTICAS EXPRESIONES
+;
+;            := var <identificador> = <expresion>;
+;               <set-expresion (id exp)>
+;
+;            := const <identificador> = <expresion>;
+;               <set-const-expresion (id exp);
 ;
 ;            := letrec ( {<identificador> = <expresion>}*(;) ) in { <expresion> }
 ;               <letrec-expresion (ids exps cuerpo)>
 ;
-;            := constantes ( {<indentificador> = <expresion>}*(;) ) in { <expresion> }
-;               <constantes-expresion (ids exps cuerpo)>
-;
-;            := procedimiento ( {<indentificador>}*(,) ) haga { <expresion> }
+;            := function ( {<indentificador>}*(,) ) { <expresion> }
 ;               <procedimiento-expresion (ids cuerpo)>
 ;
-;            := ( <expresion> {<expresion>}* )
+;            := function_rec ( {<indentificador>}*(,) ) { <expresion> }
+;               <procedimiento-expresion (ids cuerpo)>
+;
+;            := <expresion> ( {<expresion>}* )
 ;               <evaluar-expresion exp exps>
 ;
-;            := true
-;               <true-expresion>
+;            := ( expresion <primitivas-binarias> expresion )
+;               <prim-bin-expresion (exp1 prim-bin exp2)>
 ;
-;            := false
-;               <false-expresion>
+;            := { <primitivas-unarias> expresion }
+;               <prim-un-expresion (prim-un exp)>
 ;
-;            := [x32 numero {<numero>}* ]
-;               <base-32>
-;
-;            := [x16 numero {<numero>}* ]
-;               <base-16>
-;
-;            := [x8 numero {<numero>}* ]
-;               <base-8>
-;
-;            := MEZCLAVAL
-;               <valor-null-expresion>
-;
+;            := if ( <expresion> ) { <expresion> } else { <expresion> }
+;               <if-expresion (test-exp true-exp false-exp)>
 ;
 ;<primitivas-binarias> := <primitivas-binarias-10>
 ;
@@ -161,18 +167,18 @@
   '(
     (espacios (whitespace) skip)
     (cometarios ("%" (arbno (not #\newline))) skip)
-    (identificador ("!" letter (arbno (or letter digit "?"))) symbol)
+    (identificador ("$" letter (arbno (or letter digit "?"))) symbol)
     
-    ; enteros
+    ;enteros
     (numero (digit (arbno digit)) number)
     (numero ("-" digit (arbno digit)) number)
     
-    ; flotantes
+    ;flotantes
     (numero (digit (arbno digit) "." digit (arbno digit)) number)
     (numero ("-" digit (arbno digit) "." digit (arbno digit)) number)
 
-    ; texto
-    (text (":" (or letter whitespace) (arbno (or letter digit whitespace "?" "=" "'" "," "." )) ":") string)
+    ;texto
+    (text (letter (arbno (or letter digit whitespace "?" "=" "'" "," "." ))) string)
     )
   )
 
@@ -183,51 +189,7 @@
     (programa (expresion) un-programa)
     
     ; expresion
-    (expresion (numero) numero-expresion)
-    (expresion (text) texto-expresion)
-    (expresion (identificador) var-expresion)
-    (expresion (primitivas-binarias "(" expresion expresion ")") prim-bin-expresion)
-    (expresion (primitivas-unarias "(" expresion ")") prim-un-expresion)
-    (expresion ("if" "(" expresion ")" "then" "{" expresion "}" "else" "{" expresion "}") if-expresion)
-    (expresion ("let" "(" (separated-list identificador "=" expresion ";") ")" "in" "{" expresion "}") let-expresion)
-    (expresion ("letrec" "(" (separated-list identificador "=" expresion ";") ")" "in" "{" expresion "}") letrec-expresion)
-    (expresion ("constantes" "(" (separated-list identificador "=" expresion ";") ")" "in" "{" expresion "}") constantes-expresion)
-    (expresion ("procedimiento" "(" (separated-list identificador ",") "haga" "{" expresion "}") procedimiento-expresion)
-    (expresion ("(" expresion (arbno expresion) ")") evaluar-expresion)
-    (expresion ("true") true-expresion)
-    (expresion ("false") false-expresion)
-    (expresion ("[x32" numero (arbno numero) "]") base-32)
-    (expresion ("[x16" numero (arbno numero) "]") base-16)
-    (expresion ("[x8" numero (arbno numero) "]") base-8)
-    (expresion ("MEZCLAVAL") valor-null-expresion)
-
-    ;primitivas-binarias
-    (primitivas-binarias ("+") primitiva-suma)
-    (primitivas-binarias ("-") primitiva-resta)
-    (primitivas-binarias ("*") primitiva-multiplicacion)
-    (primitivas-binarias ("/") primitiva-division)
-    (primitivas-binarias ("%") primitiva-modulo)
-    (primitivas-binarias ("concatenar") primitiva-concatenar)
-    (primitivas-binarias ("cons") primitiva-cons)
-    (primitivas-binarias ("append") primitiva-append)
-    (primitivas-binarias ("<") primitiva-booleana-menor)
-    (primitivas-binarias (">") primitiva-booleana-mayor)
-    (primitivas-binarias ("menor=") primitiva-booleana-menor-igual)
-    (primitivas-binarias ("mayor=") primitiva-booleana-mayor-igual)
-    (primitivas-binarias ("==") primitiva-booleana-igual)
-    (primitivas-binarias ("!=") primitiva-booleana-diferente)
-    (primitivas-binarias ("&&") primitiva-booleana-and)
-    (primitivas-binarias ("^^") primitiva-booleana-or)
-
-    ;primitivas-unarias
-    (primitivas-unarias ("add1") primitiva-add1)
-    (primitivas-unarias ("sub1") primitiva-sub1)
-    (primitivas-unarias ("longitud") primitiva-longitud)
-    (primitivas-unarias ("car") primitiva-car)
-    (primitivas-unarias ("cdr") primitiva-cdr)
-    (primitivas-unarias ("not") primitiva-booleana-not)
-    (primitivas-unarias ("empty?") primitiva-booleana-empty)
-    (primitivas-unarias ("list?") primitiva-booleana-list)
+    (expresion (numero) numero-lit)
     )
   )
 
